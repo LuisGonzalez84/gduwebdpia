@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Estratégico: Distrito Puerto Interior Aguascalientes (DPIA)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #0ea5e9; /* sky-500 for general KPIs */
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .kpi-card-financial {
+            border-left-color: #f59e0b; /* amber-500 */
+        }
+        .kpi-card-financial .kpi-value {
+            color: #b45309; /* amber-700 */
+        }
+        .kpi-value {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1e3a8a; /* blue-900 */
+        }
+        .kpi-label {
+            font-size: 0.875rem;
+            color: #475569; /* slate-600 */
+            margin-top: 0.25rem;
+        }
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1e3a8a; /* blue-900 */
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #38bdf8; /* sky-400 */
+        }
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-blue-900">Informe Estratégico</h1>
+            <p class="text-lg text-sky-600">Distrito Puerto Interior Aguascalientes (DPIA)</p>
+            <p class="text-xs text-slate-500 mt-1">Análisis Visual para la Toma de Decisiones | GDU E8 30.07.25_V2</p>
+            <nav class="mt-3">
+                <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                    <li><a href="#resumen" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Resumen</a></li>
+                    <li><a href="#oportunidad" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Oportunidad</a></li>
+                    <li><a href="#ubicacion" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Ubicación</a></li>
+                    <li><a href="#metodologia" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Metodología</a></li>
+                    <li><a href="#hoja-de-ruta" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Hoja de Ruta</a></li>
+                    <li><a href="#viabilidad" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Viabilidad</a></li>
+                    <li><a href="#demanda" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Demanda</a></li>
+                    <li><a href="#simulacion" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Simulación</a></li>
+                    <li><a href="#nichos" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Nichos</a></li>
+                    <li><a href="#recomendaciones" class="text-slate-600 hover:text-blue-800 font-medium transition-colors">Recomendaciones</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Sección 1: Resumen Ejecutivo (TEXTO ACTUALIZADO) -->
+        <section id="resumen" class="mb-16 pt-4">
+            <h2 class="section-title">Resumen Ejecutivo</h2>
+            <div class="grid md:grid-cols-5 gap-8 items-center">
+                <div class="md:col-span-3 flex items-center justify-center">
+                    <img src="https://i.postimg.cc/MTVZFbPh/Mapa-Mundi2.gif" alt="GIF animado de un globo terráqueo" class="rounded-lg w-full h-auto object-contain">
+                </div>
+                <div class="md:col-span-2">
+                    <p class="text-lg text-slate-600 mb-8">
+                        El DPIA es una iniciativa estratégica para posicionar a Aguascalientes como un <span class="font-bold text-blue-800">nodo logístico de clase mundial</span>. El proyecto integral abarca 1,527 hectáreas con una inversión global estimada de $111,250 millones de pesos, incluyendo zonas industriales, comerciales y de servicios. Su núcleo detonador es el <span class="font-bold text-blue-800">Puerto Seco</span> (78 ha), diseñado para capitalizar la oportunidad histórica del <span class="font-bold text-blue-800">nearshoring</span> y resolver los retos de infraestructura de la región.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="kpi-card">
+                            <div class="kpi-value text-2xl">MXN 10.4K M</div>
+                            <div class="kpi-label">Inversión Puerto Seco</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value text-2xl">600,000</div>
+                            <div class="kpi-label">TEU/año (Cap. Máx.)</div>
+                        </div>
+                        <div class="kpi-card kpi-card-financial">
+                            <div class="kpi-value text-2xl">10.3%</div>
+                            <div class="kpi-label">TIR (Optimista)</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value text-2xl">~130,000</div>
+                            <div class="kpi-label">Empleos Plenos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Problemática y Oportunidad Estratégica -->
+        <section id="oportunidad" class="mb-16 pt-4">
+            <h2 class="section-title">Problemática y Oportunidad Estratégica</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-sky-500">
+                    <div class="flex items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-500 h-8 w-8 mr-3"><path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/><path d="M14 9h4l4 4v4h-8v-8Z"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/></svg>
+                        <h3 class="text-xl font-bold text-blue-800">Infraestructura Logística</h3>
+                    </div>
+                    <p class="text-slate-600 mb-2"><span class="font-semibold text-red-600">Problemática:</span> Ausencia de un puerto seco regional y dependencia del transporte carretero.</p>
+                    <p class="text-slate-600"><span class="font-semibold text-green-600">Oportunidad:</span> Posicionar al DPIA como el nodo multimodal que optimice la conectividad ferroviaria y eleve la eficiencia regional.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <div class="flex items-center mb-3">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 h-8 w-8 mr-3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        <h3 class="text-xl font-bold text-blue-800">Nearshoring e Inversión</h3>
+                    </div>
+                    <p class="text-slate-600 mb-2"><span class="font-semibold text-red-600">Problemática:</span> Competencia por atraer inversiones del T-MEC sin una oferta logística integrada.</p>
+                    <p class="text-slate-600"><span class="font-semibold text-green-600">Oportunidad:</span> Capitalizar la relocalización ofreciendo un ecosistema industrial y logístico de vanguardia.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <div class="flex items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 h-8 w-8 mr-3"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                        <h3 class="text-xl font-bold text-blue-800">Estrés Hídrico</h3>
+                    </div>
+                    <p class="text-slate-600 mb-2"><span class="font-semibold text-red-600">Problemática:</span> Déficit del 40% en el acuífero local por sobreexplotación industrial y urbana.</p>
+                    <p class="text-slate-600"><span class="font-semibold text-green-600">Oportunidad:</span> Implementar un modelo de gestión hídrica de ciclo cerrado y ser un referente de resiliencia climática.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-amber-500">
+                    <div class="flex items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 h-8 w-8 mr-3"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="4" x="2" y="20" rx="2"/><path d="M12 12h.01"/><path d="M12 8h.01"/><path d="M12 16h.01"/></svg>
+                        <h3 class="text-xl font-bold text-blue-800">Urbanización y Movilidad</h3>
+                    </div>
+                    <p class="text-slate-600 mb-2"><span class="font-semibold text-red-600">Problemática:</span> Expansión urbana dispersa y movilidad insostenible (78% en auto privado).</p>
+                    <p class="text-slate-600"><span class="font-semibold text-green-600">Oportunidad:</span> Crear un distrito planificado con usos mixtos, vivienda cercana al empleo y transporte eficiente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE MAPA -->
+        <section id="ubicacion" class="mb-16 pt-4">
+            <h2 class="section-title">Ubicación Estratégica y Área de Influencia</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 bg-white p-2 rounded-lg shadow-sm">
+                    <iframe 
+                        src="https://www.google.com/maps/d/u/0/embed?mid=1uXG22cZnt_OamHEFeI2nsB8aVo8L7xM" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">Corredor Centro-Norte</h3>
+                    <p class="text-slate-600 mb-4">
+                        La ubicación del DPIA es su mayor ventaja competitiva. Situado en el corazón de México, conecta los principales centros de manufactura con los puertos marítimos y la frontera norte.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                            <span>Sin competencia directa en un radio de <span class="font-bold">120 minutos</span>.</span>
+                        </li>
+                        <li class="flex items-start">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                            <span>Capacidad para descongestionar nodos saturados como Guanajuato y Querétaro.</span>
+                        </li>
+                         <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                            <span>Conexión directa a los corredores hacia Manzanillo y Altamira.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: Fundamento Metodológico -->
+        <section id="metodologia" class="mb-16 pt-4">
+            <h2 class="section-title text-center">Fundamento Metodológico del Proyecto</h2>
+            <p class="text-lg text-slate-600 mb-12 max-w-4xl mx-auto text-center">La arquitectura técnica y analítica que valida la viabilidad del Distrito Puerto Interior.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-sky-500 flex flex-col">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Proyección de Demanda</h3>
+                    <p class="text-slate-600 mb-4 flex-grow">Se construyó un modelo que estima el mercado potencial (TAM) y el porcentaje de captura realista para el DPIA, basándose en la competencia y el crecimiento económico proyectado.</p>
+                    <div>
+                        <h4 class="font-semibold text-blue-900 mb-2">Herramientas Clave:</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Benchmark competitivo (vs. GTO y QRO)</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Análisis de imágenes satelitales</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Proyección de mercado ligada al PIB</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-sky-500 flex flex-col">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Simulación de Impacto</h3>
+                    <p class="text-slate-600 mb-4 flex-grow">Se desarrolló una "radiografía" económica de Aguascalientes (Matriz Insumo-Producto) para simular cómo la inversión y operación del puerto generan un efecto multiplicador en la producción, el empleo y la riqueza local.</p>
+                    <div>
+                        <h4 class="font-semibold text-blue-900 mb-2">Herramientas Clave:</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Matriz Insumo-Producto (MIP)</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Metodología de regionalización (Flegg/Banxico)</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Análisis de encadenamientos y multiplicadores</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-sky-500 flex flex-col">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Dimensionamiento Físico y Financiero</h3>
+                    <p class="text-slate-600 mb-4 flex-grow">Se aplicaron las normativas de desarrollo urbano de Aguascalientes y costos de construcción de mercado para definir el tamaño, la distribución y la inversión requerida para cada una de las 22 zonas del proyecto.</p>
+                    <div>
+                        <h4 class="font-semibold text-blue-900 mb-2">Herramientas Clave:</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Plan de Desarrollo Urbano (PMDUOT)</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Costos Paramétricos (CMIC y Bimsa)</li>
+                            <li class="bg-sky-100 text-sky-800 p-2 rounded-md">Modelo de diseño modular por fases</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hoja de Ruta -->
+        <section id="hoja-de-ruta" class="mb-16 pt-4">
+            <h2 class="section-title text-center">Hoja de Ruta: Un Desarrollo por Fases</h2>
+            <p class="text-lg text-slate-600 mb-12 max-w-4xl mx-auto text-center">La implementación del DPIA se ha estructurado en una hoja de ruta de cuatro fases, garantizando un crecimiento orgánico y una adaptación tecnológica progresiva que maximiza la eficiencia y el retorno de la inversión.</p>
+            <div class="relative">
+                <div class="hidden md:block border-l-4 border-dashed border-sky-300 absolute h-full top-0 left-1/2 -ml-2"></div>
+                <div class="space-y-12 md:space-y-0">
+                    
+                    <div class="md:grid md:grid-cols-2 md:gap-x-16 items-center">
+                        <div class="md:text-right">
+                            <div class="bg-slate-700 text-white p-6 rounded-lg shadow-lg mb-4">
+                                <h3 class="text-2xl font-bold">Fase 0: Habilitación (Pre-Construcción)</h3>
+                                <p class="mt-2 text-slate-300">Aseguramiento de la tenencia de la tierra</p>
+                                <p class="mt-2 font-semibold">Hitos Clave:</p>
+                                <ul class="list-disc list-inside mt-1 text-sm text-slate-200">
+                                    <li>Adquisición directa de zonas críticas</li>
+                                    <li>Creación de Fideicomiso Maestro de Suelo</li>
+                                    <li>Gestión de derechos de vía y servidumbres</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-slate-700 rounded-full absolute left-1/2 -ml-4 border-4 border-white"></div>
+                        <div></div>
+                    </div>
+
+                    <div class="md:grid md:grid-cols-2 md:gap-x-16 items-center">
+                        <div class="md:col-start-2">
+                            <div class="bg-blue-900 text-white p-6 rounded-lg shadow-lg mb-4">
+                                <h3 class="text-2xl font-bold">Fase 1: Arranque (Años 1-2)</h3>
+                                <p class="mt-2 text-blue-200">Capacidad: 25,000 TEUs/año</p>
+                                <p class="mt-2 font-semibold">Hitos Clave:</p>
+                                <ul class="list-disc list-inside mt-1 text-sm text-blue-300">
+                                    <li>Patio básico y RFE "light"</li>
+                                    <li>Infraestructura digital base (CCTV/RFID)</li>
+                                    <li>Vialidad primaria y oficinas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-blue-900 rounded-full absolute left-1/2 -ml-4 border-4 border-white"></div>
+                    </div>
+
+                    <div class="md:grid md:grid-cols-2 md:gap-x-16 items-center">
+                        <div class="md:text-right">
+                            <div class="bg-sky-700 text-white p-6 rounded-lg shadow-lg mb-4">
+                                <h3 class="text-2xl font-bold">Fase 2: Consolidación (Años 3-5)</h3>
+                                <p class="mt-2 text-sky-200">Capacidad: 50,000 TEUs/año</p>
+                                <p class="mt-2 font-semibold">Hitos Clave:</p>
+                                <ul class="list-disc list-inside mt-1 text-sm text-sky-300">
+                                    <li>RFE completo y ampliación de almacenes</li>
+                                    <li>Primeros módulos de Valor Agregado (VA)</li>
+                                    <li>Sensorización IoT y trazabilidad predictiva</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-sky-700 rounded-full absolute left-1/2 -ml-4 border-4 border-white"></div>
+                    </div>
+
+                    <div class="md:grid md:grid-cols-2 md:gap-x-16 items-center">
+                        <div class="md:col-start-2">
+                            <div class="bg-sky-500 text-white p-6 rounded-lg shadow-lg mb-4">
+                                <h3 class="text-2xl font-bold">Fase 3: Madurez (Años 6-10)</h3>
+                                <p class="mt-2 text-sky-200">Capacidad: 150,000 TEUs/año</p>
+                                <p class="mt-2 font-semibold">Hitos Clave:</p>
+                                <ul class="list-disc list-inside mt-1 text-sm text-sky-300">
+                                    <li>Terminal Ro-Ro y cámaras de frío</li>
+                                    <li>Implementación de grúas híbridas (RTG)</li>
+                                    <li>Dashboard de eficiencia energética</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-sky-500 rounded-full absolute left-1/2 -ml-4 border-4 border-white"></div>
+                    </div>
+                    
+                    <div class="md:grid md:grid-cols-2 md:gap-x-16 items-center">
+                        <div class="md:text-right">
+                            <div class="bg-sky-200 text-sky-900 p-6 rounded-lg shadow-lg mb-4">
+                                <h3 class="text-2xl font-bold">Fase 4: Plena Madurez (Años 11-20)</h3>
+                                <p class="mt-2 text-sky-800">Capacidad: 360,000+ TEUs/año</p>
+                                <p class="mt-2 font-semibold">Hitos Clave:</p>
+                                <ul class="list-disc list-inside mt-1 text-sm text-sky-700">
+                                    <li>Automatización total de patio (ASC)</li>
+                                    <li>Generación fotovoltaica y almacenamiento</li>
+                                    <li>Trazabilidad de carbono con Blockchain</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-sky-200 rounded-full absolute left-1/2 -ml-4 border-4 border-white"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección 3: Viabilidad Financiera y Fases (ACTUALIZADA CON TABLA) -->
+        <section id="viabilidad" class="mb-16 pt-4">
+             <h2 class="section-title">Viabilidad Financiera y Fases del Proyecto</h2>
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                     <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Indicadores Financieros <span class="text-base font-medium text-slate-500">(Esc. Optimista)</span></h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="kpi-card kpi-card-financial">
+                            <div class="kpi-value text-2xl">+1,012 M</div>
+                            <div class="kpi-label">VAN (MXN)</div>
+                        </div>
+                        <div class="kpi-card kpi-card-financial">
+                            <div class="kpi-value text-2xl">10.3%</div>
+                            <div class="kpi-label">TIR</div>
+                        </div>
+                        <div class="kpi-card kpi-card-financial">
+                            <div class="kpi-value text-2xl">1.47x</div>
+                            <div class="kpi-label">ROI</div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-8">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Resumen de Fases y CAPEX</h3>
+                        <div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+                            <table class="w-full text-sm text-left text-slate-600">
+                                <thead class="text-xs text-blue-900 uppercase bg-slate-100">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Fase</th>
+                                        <th scope="col" class="px-6 py-3">Superficie (ha)</th>
+                                        <th scope="col" class="px-6 py-3">Capacidad (TEUs)</th>
+                                        <th scope="col" class="px-6 py-3">CAPEX (MXN M)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Fase 1 - Arranque</th>
+                                        <td class="px-6 py-4">18</td>
+                                        <td class="px-6 py-4">1,000</td>
+                                        <td class="px-6 py-4">$1,035</td>
+                                    </tr>
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Fase 2 - Consolidación</th>
+                                        <td class="px-6 py-4">12</td>
+                                        <td class="px-6 py-4">2,500</td>
+                                        <td class="px-6 py-4">$943</td>
+                                    </tr>
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Fase 3 - Madurez</th>
+                                        <td class="px-6 py-4">25</td>
+                                        <td class="px-6 py-4">6,500</td>
+                                        <td class="px-6 py-4">$1,961</td>
+                                    </tr>
+                                    <tr class="bg-white">
+                                        <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Fase 4 - Plena Madurez</th>
+                                        <td class="px-6 py-4">23</td>
+                                        <td class="px-6 py-4">11,000</td>
+                                        <td class="px-6 py-4">$6,506</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Inversión Acumulada por Fase (MXN M)</h3>
+                    <canvas id="investmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Demanda y Contexto Global (TEXTO Y GRÁFICA ACTUALIZADOS) -->
+        <section id="demanda" class="mb-16 pt-4">
+            <h2 class="section-title">Demanda Potencial y Contexto Global</h2>
+            <p class="text-lg text-slate-600 mb-8 max-w-5xl mx-auto text-center">
+                El Puerto Seco del DPIA está diseñado para crecer junto a la demanda. El plan de inversión por fases asegura la viabilidad financiera, mientras que las proyecciones de carga validan la necesidad de infraestructura a largo plazo. La brecha de desempeño logístico entre México y los paises líderes es una ventana de oportunidad para este proyecto.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Proyección de Demanda de Carga (TEUs/Año)</h3>
+                    <div style="height: 400px;">
+                        <canvas id="demandProjectionChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Índice de Desempeño Logístico (LPI)</h3>
+                    <div style="height: 400px;">
+                        <canvas id="lpiRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: Simulación de Impacto Económico -->
+        <section id="simulacion" class="mb-16 pt-4">
+            <h2 class="section-title">Simulación de Impactos Sectoriales</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">Herramienta Interactiva</h3>
+                    <p class="text-slate-600 mb-4">
+                        Para un análisis detallado del impacto económico, se ha desarrollado una aplicación interactiva. Esta herramienta, basada en la metodología de regionalización de la Matriz Insumo-Producto para Aguascalientes, permite simular los efectos multiplicadores de la inversión del DPIA en diversos sectores de la economía local.
+                    </p>
+                    <p class="text-slate-600">
+                        Utilice la aplicación para explorar escenarios y cuantificar cómo la demanda generada por el puerto puede impulsar el crecimiento en la producción, el empleo y el valor agregado en toda la región.
+                    </p>
+                </div>
+                <div class="md:col-span-2 bg-white p-2 rounded-lg shadow-sm">
+                    <iframe 
+                        src="https://cleiver.shinyapps.io/prueba_matriz_ip_ag/" 
+                        width="100%" 
+                        height="600" 
+                        style="border:0; border-radius: 0.5rem;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 6: Nichos de Mercado -->
+        <section id="nichos" class="mb-16 pt-4">
+             <h2 class="section-title">Nichos de Mercado Estratégicos</h2>
+            <p class="text-lg text-slate-600 mb-8 max-w-4xl">
+                El DPIA está diseñado para servir a los sectores de mayor dinamismo de la región, ofreciendo soluciones logísticas a la medida de sus necesidades, con un enfoque especial en el clúster automotriz.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-2 rounded-lg shadow-md">
+                    <img src="https://i.postimg.cc/SstXG5CG/Mapa-plantas-automotriz.png" alt="Mapa del clúster automotriz en México" class="rounded-lg w-full h-auto object-contain">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center transform hover:-translate-y-1.5 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-800 mx-auto mb-4"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                        <h4 class="font-bold text-xl text-blue-900">Automotriz</h4>
+                        <p class="text-slate-600 text-sm mt-3"><span class="pill bg-blue-100 text-blue-800">Just-in-Time</span>Servicios clave, recintos fiscalizados y conexión con OEMs.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center transform hover:-translate-y-1.5 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-800 mx-auto mb-4"><rect width="14" height="14" x="5" y="5" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v4"/><path d="M15 1v4"/><path d="M9 23v-4"/><path d="M15 23v-4"/><path d="M1 9v6"/><path d="M23 9v6"/><path d="M1 15h4"/><path d="M1 9h4"/><path d="M19 15h4"/><path d="M19 9h4"/></svg>
+                        <h4 class="font-bold text-xl text-blue-900">Electrónica</h4>
+                         <p class="text-slate-600 text-sm mt-3"><span class="pill bg-green-100 text-green-800">Alta Seguridad</span>Trazabilidad de componentes de alto valor y logística inversa.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center transform hover:-translate-y-1.5 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-800 mx-auto mb-4"><path d="M11 20A7 7 0 0 1 4 13V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v7a7 7 0 0 1-7 7h-1Z"/><path d="M12 14a3 3 0 0 0 3-3V8H9v3a3 3 0 0 0 3 3Z"/></svg>
+                        <h4 class="font-bold text-xl text-blue-900">Agroindustria</h4>
+                        <p class="text-slate-600 text-sm mt-3"><span class="pill bg-sky-100 text-sky-800">Cadena de Frío</span>Almacenamiento refrigerado, certificaciones y gestión de exportaciones.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center transform hover:-translate-y-1.5 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-800 mx-auto mb-4"><path d="M12 22v-5"/><path d="M9 17H7.2a2 2 0 0 1-1.7-1L3.9 11a2 2 0 0 1 .4-2.3l4-3.4a2 2 0 0 1 2.4 0l4 3.4a2 2 0 0 1 .4 2.3l-1.6 4.8a2 2 0 0 1-1.7 1H15"/><path d="M9 17h6"/><path d="M12 17v-5"/><path d="M15 17h2.8a2 2 0 0 0 1.7-1l1.6-4.8a2 2 0 0 0-.4-2.3l-4-3.4a2 2 0 0 0-2.4 0l-4 3.4a2 2 0 0 0-.4 2.3l1.6 4.8a2 2 0 0 0 1.7 1H9"/></svg>
+                        <h4 class="font-bold text-xl text-blue-900">Empresas IMMEX</h4>
+                        <p class="text-slate-600 text-sm mt-3"><span class="pill bg-amber-100 text-amber-800">Eficiencia Aduanal</span>Alta conectividad y servicios de valor agregado (VMI, etiquetado).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 7: Recomendaciones Estratégicas y Plan Maestro (ACTUALIZADA) -->
+        <section id="recomendaciones" class="mb-12 pt-4">
+             <h2 class="section-title">Recomendaciones y Plan Maestro</h2>
+            <div class="bg-blue-900 text-white p-8 rounded-lg shadow-xl mb-8">
+                <h3 class="text-2xl font-bold text-white mb-4 border-b-2 border-sky-400 pb-2">Siguientes Pasos Estratégicos</h3>
+                <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-sky-300 mr-4 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                        <div>
+                            <h4 class="font-bold text-lg">Asegurar Terreno y Conectividad</h4>
+                            <p class="text-blue-100">Adquirir el predio (~78 ha) y formalizar el MoU con Ferromex/KCSM para el ramal férreo de la Fase 1.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-sky-300 mr-4 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                        <div>
+                            <h4 class="font-bold text-lg">Estructurar Financiamiento</h4>
+                            <p class="text-blue-100">Avanzar en el esquema APP. Usar leasing y créditos para fases iniciales; explorar bonos verdes para fases maduras.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-sky-300 mr-4 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                        <div>
+                            <h4 class="font-bold text-lg">Implementar Tecnología y ESG</h4>
+                            <p class="text-blue-100">Desplegar plataformas digitales (WMS, TMS) y un programa ESG desde el inicio. Buscar certificaciones LEED/EDGE.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-sky-300 mr-4 mt-1 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                        <div>
+                            <h4 class="font-bold text-lg">Establecer Gobernanza</h4>
+                            <p class="text-blue-100">Crear la Oficina de Gestión de Proyecto (PMO), definir KPIs y fijar triggers de ocupación para activar cada nueva fase.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-blue-900 mb-4 text-center">Modelo de Gobernanza Sugerido: Asociación Público-Privada (APP)</h3>
+                <p class="text-slate-600 mb-4">Para un proyecto modular y de largo plazo como el DPIA, el modelo de gobernanza más adecuado es una **Asociación Público-Privada (APP)**. Este esquema permite equilibrar el control estratégico del Estado con la eficiencia, agilidad y capital del sector privado.</p>
+                <ul class="list-disc list-inside text-slate-600 space-y-2">
+                    <li><span class="font-semibold">Transferencia de Riesgo:</span> El socio privado asume los riesgos de construcción y operación de cada fase, incentivando la eficiencia.</li>
+                    <li><span class="font-semibold">Flexibilidad Financiera:</span> Permite que la inversión se active por fases, condicionada a la demanda real, sin comprometer grandes recursos públicos desde el inicio.</li>
+                    <li><span class="font-semibold">Atracción de Expertise:</span> Facilita la incorporación de operadores logísticos con experiencia global en el desarrollo y gestión de puertos secos.</li>
+                </ul>
+            </div>
+            
+            <div id="plan-maestro" class="mt-8 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-blue-900 mb-4 text-center">Hacia la Factibilidad Avanzada: Estudios del Plan Maestro</h3>
+                <p class="text-slate-600 mb-6 text-center">Para llevar el proyecto a la siguiente etapa, se requiere una serie de estudios técnicos que profundicen el nivel de detalle y validen los supuestos clave.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-blue-900 uppercase bg-slate-100">
+                            <tr>
+                                <th class="px-6 py-3">Área Temática</th>
+                                <th class="px-6 py-3">Estudio Requerido</th>
+                                <th class="px-6 py-3">Tipo de Factibilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-medium">Infraestructura</td>
+                                <td class="px-6 py-4">Anteproyectos de vialidades y ramal ferroviario.</td>
+                                <td class="px-6 py-4"><span class="pill bg-blue-100 text-blue-800">Técnica</span></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-medium">Ingeniería de Sitios</td>
+                                <td class="px-6 py-4">Layouts funcionales, flujos operativos y dimensionamiento de patios.</td>
+                                <td class="px-6 py-4"><span class="pill bg-blue-100 text-blue-800">Técnica</span></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-medium">Demanda y Mercado</td>
+                                <td class="px-6 py-4">Simulaciones de carga y entrevistas con usuarios potenciales.</td>
+                                <td class="px-6 py-4"><span class="pill bg-green-100 text-green-800">Técnica / Económica</span></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-medium">Costos y Finanzas</td>
+                                <td class="px-6 py-4">Análisis de costos unitarios y CAPEX refinado por fase.</td>
+                                <td class="px-6 py-4"><span class="pill bg-green-100 text-green-800">Económica</span></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-medium">Legal y Gobernanza</td>
+                                <td class="px-6 py-4">Estudios de tenencia de la tierra y modelos de APP/concesión.</td>
+                                <td class="px-6 py-4"><span class="pill bg-amber-100 text-amber-800">Legal / Institucional</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <img src="https://i.postimg.cc/hGFfBWp5/logo.jpg" alt="Logo GDU Gestión y Diseño Urbano S.C." class="h-12 mx-auto mb-4">
+            <p>&copy; 2025 | Informe Estratégico Visual.</p>
+            <p class="text-slate-400">Basado en el estudio: GDU E8 30.07.25_V2.</p>
+        </div>
+    </footer>
+
+    <script>
+        const demandProjectionCtx = document.getElementById('demandProjectionChart').getContext('2d');
+        new Chart(demandProjectionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Año 0', 'Año 5', 'Año 10', 'Año 15', 'Año 20'],
+                datasets: [
+                    {
+                        label: 'Escenario Bajo (TEUs)',
+                        data: [0, 25000, 92000, 180000, 266000],
+                        borderColor: '#7dd3fc', // sky-300
+                        backgroundColor: 'rgba(125, 211, 252, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Escenario Medio (TEUs)',
+                        data: [0, 31000, 150000, 270000, 366500],
+                        borderColor: '#0ea5e9', // sky-500
+                        backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Escenario Alto (TEUs)',
+                        data: [0, 42000, 190000, 350000, 467000],
+                        borderColor: '#0369a1', // sky-700
+                        backgroundColor: 'rgba(3, 105, 161, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: '#475569' } },
+                    x: { ticks: { color: '#475569' } }
+                },
+                plugins: {
+                    legend: { position: 'top', labels: { color: '#475569' } }
+                }
+            }
+        });
+
+        const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+        new Chart(investmentCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4'],
+                datasets: [{
+                    label: 'Inversión por Fase',
+                    data: [1035, 943, 1958, 6506],
+                    backgroundColor: '#f59e0b',
+                }, {
+                    label: 'Inversión Acumulada',
+                    data: [1035, 1978, 3939, 10445],
+                    type: 'line',
+                    borderColor: '#1e3a8a',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' }, tooltip: { mode: 'index', intersect: false } },
+                scales: { y: { beginAtZero: true, stacked: false, ticks: { callback: (v) => v + ' M' } } }
+            }
+        });
+
+        const radarCtx = document.getElementById('lpiRadarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Infraestructura', 'Aduanas', 'Puntualidad', 'Trazabilidad', 'Competencia'],
+                datasets: [{
+                    label: 'México (LPI: 2.9)',
+                    data: [2.7, 2.7, 3.5, 3.0, 2.8],
+                    fill: true,
+                    backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                    borderColor: 'rgb(56, 189, 248)',
+                    pointBackgroundColor: 'rgb(56, 189, 248)',
+                }, {
+                    label: 'Países Líderes (LPI > 4.0)',
+                    data: [4.5, 4.5, 4.0, 4.2, 4.3],
+                    fill: true,
+                    backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                    borderColor: 'rgb(30, 58, 138)',
+                    pointBackgroundColor: 'rgb(30, 58, 138)',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top' } },
+                scales: { r: { angleLines: { display: false }, suggestedMin: 1, suggestedMax: 5, pointLabels: { font: { size: 10 } } } }
+            }
+        });
+    </script>
+
+</body>
+</html>
